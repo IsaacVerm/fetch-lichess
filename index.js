@@ -1,10 +1,14 @@
 import 'dotenv/config'
 import fetch from 'node-fetch';
 
+const params = new URLSearchParams({
+    max: 5
+});
+
 const headers = {
-  Authorization: 'Bearer ' + process.env.lichessToken,
+  Authorization: 'Bearer ' + process.env.lichessToken
 };
 
-fetch('https://lichess.org/api/account', { headers })
-  .then(res => res.json())
-  .then(console.log);
+const response = await fetch('https://lichess.org/api/games/user/Isaacinator?' + params.toString(), { headers })
+const body = await response.text()
+console.log(body)
